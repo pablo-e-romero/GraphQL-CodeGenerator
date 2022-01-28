@@ -6,17 +6,25 @@
 //
 
 import Foundation
+import Stencil
+import PathKit
 
 public struct Generator {
     private let scalars: ScalarMap
+    private let environment: Environment
 
     // MARK: - Initializer
 
-    public init(scalars: ScalarMap) {
+    public init(scalars: ScalarMap, templatesPaths: [Path]) {
         self.scalars = ScalarMap.builtin.merging(
             scalars,
             uniquingKeysWith: { _, override in override }
         )
+
+        self.environment = Environment(
+            loader: FileSystemLoader(paths: templatesPaths),
+            extensions: [],
+            templateClass: Template.self)
     }
 
     // MARK: - Methods
@@ -30,62 +38,39 @@ public struct Generator {
 //        return code
 //    }
 
-/*
-    ```
-    import Stencil
-
-    struct Article {
-      let title: String
-      let author: String
+    private func loadSchema(from path: Path) throws -> Schema {
+        let data = try Data(contentsOf: path.url)
+        let decoder = JSONDecoder()
+        let result = try decoder.decode(Reponse<IntrospectionQuery>.self, from: data)
+        return result.data.schema
     }
 
-    let context = [
-      "articles": [
-        Article(title: "Migrating from OCUnit to XCTest", author: "Kyle Fuller"),
-        Article(title: "Memory Management with ARC", author: "Kyle Fuller"),
-      ]
-    ]
+    private func buildContext(from schema: Schema) -> [String: Any] {
+        return [
+            "operations": schema.operations,
+            "objects": schema.objects,
+            "interfaces": schema.interfaces,
+            "unions": schema.unions,
+            "enums": schema.enums,
+            "inputObjects": schema.inputObjects
+        ]
+    }
 
-    let environment = Environment(loader: FileSystemLoader(paths: ["templates/"]))
-    let rendered = try environment.renderTemplate(name: "article_list.html", context: context)
+    func generate(schemaPath: Path, templateName: String, outputPath: Path) throws {
+        let schema = try loadSchema(from: schemaPath)
+        let context = buildContext(from: schema)
 
-    print(rendered)
-    ```
- */
+        var rendered = try environment.renderTemplate(
+            name: templateName,
+            context: context)
 
-    /// Generates the code that can be used to define selections.
-    func generate(schema: Schema) throws -> String {
-        let code = """
-        // This file was auto-generated using maticzav/swift-graphql. DO NOT EDIT MANUALLY!
-        import SwiftGraphQL
+        rendered = rendered.trimmingCharacters(in: CharacterSet.newlines)
 
-        // MARK: - Operations
-        enum Operations {}
-        \(schema.operations.map { $0 })
+        print(rendered)
 
-        // MARK: - Objects
-        enum Objects {}
-        \(schema.objects.map { $0 })
-
-        // MARK: - Interfaces
-        enum Interfaces {}
-        \(schema.interfaces.map { $0 })
-
-        // MARK: - Unions
-        enum Unions {}
-        \(schema.unions.map { $0 })
-
-        // MARK: - Enums
-        enum Enums {}
-        \(schema.enums.map { $0 })
-
-        // MARK: - Input Objects
-        enum InputObjects {}
-        \(schema.inputObjects.map { $0 })
-        """
-
-//        let source = try code.format()
-//        return source
-        return code
+        try rendered.write(
+            toFile: outputPath.string,
+            atomically: true,
+            encoding: .utf8)
     }
 }

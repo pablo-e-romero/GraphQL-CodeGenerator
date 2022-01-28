@@ -3,22 +3,4 @@
    uuid = "07551B43-599F-4951-9226-8086DC47981F"
    type = "1"
    version = "2.0">
-   <Breakpoints>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "CF5A4201-4FAA-4A1A-9760-4FFF3C1FB975"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "GraphQL-CodeGenerator/main.swift"
-            startingColumnNumber = "54"
-            endingColumnNumber = "72"
-            startingLineNumber = "41"
-            endingLineNumber = "41"
-            landmarkName = "run()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-   </Breakpoints>
 </Bucket>

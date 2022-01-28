@@ -1,0 +1,8 @@
+// MARK: - Objects
+
+{% for object in objects %}
+// Object name: {{ object.name }}
+{% for field in object.fields %}
+    // Field name: {{ field.name }}
+{% endfor %}
+{% endfor %}
