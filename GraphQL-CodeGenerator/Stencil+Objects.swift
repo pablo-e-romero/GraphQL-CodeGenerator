@@ -50,12 +50,34 @@ enum Stencil {
         public let hasDescription: Bool
         public let descriptionLines: [String]
         public let fields: [Stencil.Field]
-        //    public let interfaces: [InterfaceTypeRef]?
+        public let conformsSomeInterface: Bool
+        public let interfacesName: [String]
 
         init(_ objectType: ObjectType) {
             self.name = objectType.name
             (self.hasDescription, self.descriptionLines) = processDescriptionLines(objectType.description)
             self.fields = objectType.fields.map(Stencil.Field.init)
+            let interfaces = objectType.interfaces.map { $0.map(\.name) } ?? []
+            self.conformsSomeInterface = !interfaces.isEmpty
+            self.interfacesName = interfaces
+        }
+    }
+
+    public struct Interface {
+        public let name: String
+        public let hasDescription: Bool
+        public let descriptionLines: [String]
+
+        public let fields: [Stencil.Field]
+        public let interfacesName: [String]?
+        public let possibleTypesName: [String]
+
+        init(_ interfaceType: InterfaceType) {
+            self.name = interfaceType.name
+            (self.hasDescription, self.descriptionLines) = processDescriptionLines(interfaceType.description)
+            self.fields = interfaceType.fields.map(Stencil.Field.init)
+            self.interfacesName = interfaceType.interfaces.map { $0.map(\.name) }
+            self.possibleTypesName = interfaceType.possibleTypes.map(\.name)
         }
     }
 

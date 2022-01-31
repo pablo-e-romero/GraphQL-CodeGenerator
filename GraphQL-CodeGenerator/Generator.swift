@@ -43,7 +43,7 @@ public struct Generator {
         return [
 //            "operations": schema.operations,
             "objects": schema.objects.map(Stencil.Object.init),
-//            "interfaces": schema.interfaces,
+            "interfaces": schema.interfaces.map(Stencil.Interface.init),
 //            "unions": schema.unions,
             "enums": schema.enums.map(Stencil.Enum.init),
 //            "inputObjects": schema.inputObjects

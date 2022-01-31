@@ -4,7 +4,7 @@
     {% for line in object.descriptionLines %}
 /// {{ line }}
     {% endfor %}    
-public struct {{ object.name }} {
+public struct {{ object.name }}{% if object.conformsSomeInterface %}: {{ object.interfacesName|join:", " }}{% endif %} {
     {% for field in object.fields %}
         {% for line in field.descriptionLines %}
     /// {{ line }}
@@ -17,9 +17,9 @@ public struct {{ object.name }} {
             {% endif %}
         {% endif %}
         {% if field.isArray %} 
-    var {{ field.name }}: [{{ field.typeName }}]{% if field.isOptional %}?{% endif %}
+    public let {{ field.name }}: [{{ field.typeName }}]{% if field.isOptional %}?{% endif %}
         {% else %}
-    var {{ field.name }}: {{ field.typeName }}{% if field.isOptional %}?{% endif %}
+    public let {{ field.name }}: {{ field.typeName }}{% if field.isOptional %}?{% endif %}
         {% endif %}
     {% endfor %}
 }
@@ -45,6 +45,34 @@ public enum {{ enum.name }} {
             {% endif %}
         {% endif %}
     case {{ enumValue.name }}
+    {% endfor %}
+}
+
+{% endfor %}
+
+// MARK: - Protocols
+
+{% for interface in interfaces %}
+    {% for line in interface.descriptionLines %}
+/// {{ line }}
+    {% endfor %}    
+public protocol {{ interface.name }} {
+    {% for field in interface.fields %}
+        {% for line in field.descriptionLines %}
+    /// {{ line }}
+        {% endfor %}
+        {% if field.isDeprecated %}
+            {% if field.hasDeprecationReason %}
+    @available(*, deprecated, message: "{{ field.deprecationReason }}")
+            {% else %}
+    @available(*, deprecated)  
+            {% endif %}
+        {% endif %}
+        {% if field.isArray %} 
+    var {{ field.name }}: [{{ field.typeName }}]{% if field.isOptional %}?{% endif %} { get }
+        {% else %}
+    var {{ field.name }}: {{ field.typeName }}{% if field.isOptional %}?{% endif %} { get }
+        {% endif %}
     {% endfor %}
 }
 
