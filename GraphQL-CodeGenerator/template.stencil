@@ -3,8 +3,14 @@
 {% for object in objects %}
 public struct {{ object.name }} {
     {% for field in object.fields %}
-    var {{ field.name }}: {% if field.isArray %}{% if field.isOptional %}[{{ field.typeName }}]?{% else %}[{{ field.typeName }}]{% endif %}{% else %}{% if field.isOptional %}{{ field.typeName }}?{% else %}{{ field.typeName }}{% endif %}{% endif %}{% endfor %}
+        {% if field.isArray %} 
+    var {{ field.name }}: [{{ field.typeName }}]{% if field.isOptional %}?{% endif %}
+        {% else %}
+    var {{ field.name }}: {{ field.typeName }}{% if field.isOptional %}?{% endif %}
+        {% endif %}
+    {% endfor %}
 }
+
 {% endfor %}
 
 // MARK: - Enums
@@ -12,6 +18,8 @@ public struct {{ object.name }} {
 {% for enum in enums %}
 public enum {{ enum.name }} {
     {% for value in enum.values %}
-    case {{ value.name }}{% endfor %}
+    case {{ value.name }}
+    {% endfor %}
 }
+
 {% endfor %}

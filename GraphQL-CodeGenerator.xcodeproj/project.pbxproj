@@ -29,6 +29,7 @@
 		B1849E4027A4CAC400900974 /* Stencil+Objects.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1849E3F27A4CAC400900974 /* Stencil+Objects.swift */; };
 		B1849E4627A803D200900974 /* String+Normalize.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1849E4527A803D200900974 /* String+Normalize.swift */; };
 		B1849E4B27A80B8C00900974 /* String+Empty.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1849E4A27A80B8C00900974 /* String+Empty.swift */; };
+		B1849E4D27A839C600900974 /* StencilSwiftTemplate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1849E4C27A839C600900974 /* StencilSwiftTemplate.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -82,6 +83,7 @@
 		B1849E3F27A4CAC400900974 /* Stencil+Objects.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Stencil+Objects.swift"; sourceTree = "<group>"; };
 		B1849E4527A803D200900974 /* String+Normalize.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Normalize.swift"; sourceTree = "<group>"; };
 		B1849E4A27A80B8C00900974 /* String+Empty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Empty.swift"; sourceTree = "<group>"; };
+		B1849E4C27A839C600900974 /* StencilSwiftTemplate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StencilSwiftTemplate.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -126,6 +128,7 @@
 				B1849E0927A44F4F00900974 /* Error.swift */,
 				B1849E0727A44F3100900974 /* ScalarMap.swift */,
 				B1849E3F27A4CAC400900974 /* Stencil+Objects.swift */,
+				B1849E4C27A839C600900974 /* StencilSwiftTemplate.swift */,
 				B1849E1D27A459C100900974 /* schema.json */,
 				B1849E3127A4AE3D00900974 /* template.stencil */,
 				B1849E0D27A4518500900974 /* GraphQLAST */,
@@ -230,6 +233,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B1849E4D27A839C600900974 /* StencilSwiftTemplate.swift in Sources */,
 				B1849E4027A4CAC400900974 /* Stencil+Objects.swift in Sources */,
 				B1849E1827A4518500900974 /* TypeRef.swift in Sources */,
 				B1849E1727A4518500900974 /* Schema.swift in Sources */,

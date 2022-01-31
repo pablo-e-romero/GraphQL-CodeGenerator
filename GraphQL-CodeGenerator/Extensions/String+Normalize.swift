@@ -10,6 +10,8 @@ extension String {
     }
 }
 
+// https://docs.swift.org/swift-book/ReferenceManual/LexicalStructure.html
+
 let reservedWords: Set<String> = [
     /* Keywords used in delcarations. */
     "associatedtype",

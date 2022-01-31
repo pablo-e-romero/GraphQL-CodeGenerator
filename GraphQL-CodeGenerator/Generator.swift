@@ -16,7 +16,9 @@ public struct Generator {
 
     public init(templatesPaths: [Path]) {
         // TODO: add extensions
-        self.environment = Environment(loader: FileSystemLoader(paths: templatesPaths))
+        self.environment = Environment(
+            loader: FileSystemLoader(paths: templatesPaths),
+            templateClass: StencilSwiftTemplate.self)
     }
 
     // MARK: - Methods
