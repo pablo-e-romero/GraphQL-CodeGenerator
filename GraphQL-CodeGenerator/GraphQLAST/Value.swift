@@ -5,7 +5,7 @@ public struct Field: Decodable, Equatable {
     public let name: String
     public let description: String?
     public let args: [InputValue]
-    public let type: OutputTypeRef
+    public let type: TypeRef<OutputRef>
     public let isDeprecated: Bool
     public let deprecationReason: String?
 }
@@ -14,7 +14,7 @@ public struct Field: Decodable, Equatable {
 public struct InputValue: Decodable, Equatable {
     public let name: String
     public let description: String?
-    public let type: InputTypeRef
+    public let type: TypeRef<InputRef>
 }
 
 /// Represents a  GraphQL enumerator case.

@@ -1,8 +1,8 @@
 // MARK: - Objects
 
 {% for object in objects %}
-// Object name: {{ object.name }}
+public struct {{ object.name }} {
 {% for field in object.fields %}
-    // Field name: {{ field.name }}
-{% endfor %}
+    var {{ field.name }}: {{ field.typeName }}{% endfor %}
+}
 {% endfor %}

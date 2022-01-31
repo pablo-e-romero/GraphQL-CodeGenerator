@@ -34,8 +34,11 @@ extension Generate {
 //                config = Config()
 //            }
 
+            let configuration = Configuration()
+
+            scalarMap.merge(with: configuration.scalars)
+
             let generator = Generator(
-                scalars: Configuration().scalars,
                 templatesPaths: ["templates/"])
            
             try! generator.generate(

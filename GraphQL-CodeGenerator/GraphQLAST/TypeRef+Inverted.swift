@@ -1,19 +1,19 @@
 import Foundation
 
-public indirect enum InvertedTypeRef<Type> {
-    case named(Type)
+public indirect enum InvertedTypeRef<T: TypeDescription> {
+    case named(T)
     case nullable(InvertedTypeRef)
     case list(InvertedTypeRef)
 
     // MARK: - Calculated properties
 
     /// Returns a nullable instance of self.
-    public var nullable: InvertedTypeRef<Type> {
+    public var nullable: InvertedTypeRef<T> {
         inverted.nullable.inverted
     }
 
     /// Returns a non nullable instance of self.
-    public var nonNullable: InvertedTypeRef<Type> {
+    public var nonNullable: InvertedTypeRef<T> {
         switch self {
         case let .nullable(subref):
             return subref
@@ -25,7 +25,7 @@ public indirect enum InvertedTypeRef<Type> {
 
 public extension InvertedTypeRef {
     /// Returns the bottom most named type in reference.
-    var namedType: Type {
+    var namedType: T {
         switch self {
         case let .named(type):
             return type
@@ -35,12 +35,12 @@ public extension InvertedTypeRef {
     }
 }
 
-extension InvertedTypeRef: Equatable where Type: Equatable {}
+extension InvertedTypeRef: Equatable where T: Equatable {}
 
 // MARK: - Conversion
 
 public extension TypeRef {
-    var inverted: InvertedTypeRef<Type> {
+    var inverted: InvertedTypeRef<T> {
         switch self {
         case let .named(named):
             return .nullable(.named(named))
@@ -59,7 +59,7 @@ public extension TypeRef {
 }
 
 public extension InvertedTypeRef {
-    var inverted: TypeRef<Type> {
+    var inverted: TypeRef<T> {
         switch self {
         case let .named(named):
             return .nonNull(.named(named))
@@ -79,6 +79,6 @@ public extension InvertedTypeRef {
 
 // MARK: - Type Alias
 
-public typealias InvertedNamedTypeRef = InvertedTypeRef<NamedRef>
-public typealias InvertedOutputTypeRef = InvertedTypeRef<OutputRef>
-public typealias InvertedInputTypeRef = InvertedTypeRef<InputRef>
+//public typealias InvertedNamedTypeRef = InvertedTypeRef<NamedRef>
+//public typealias InvertedOutputTypeRef = InvertedTypeRef<OutputRef>
+//public typealias InvertedInputTypeRef = InvertedTypeRef<InputRef>

@@ -10,21 +10,13 @@ import Stencil
 import PathKit
 
 public struct Generator {
-    private let scalars: ScalarMap
     private let environment: Environment
 
     // MARK: - Initializer
 
-    public init(scalars: ScalarMap, templatesPaths: [Path]) {
-        self.scalars = ScalarMap.builtin.merging(
-            scalars,
-            uniquingKeysWith: { _, override in override }
-        )
-
-        self.environment = Environment(
-            loader: FileSystemLoader(paths: templatesPaths),
-            extensions: [],
-            templateClass: Template.self)
+    public init(templatesPaths: [Path]) {
+        // TODO: add extensions
+        self.environment = Environment(loader: FileSystemLoader(paths: templatesPaths))
     }
 
     // MARK: - Methods
@@ -48,7 +40,7 @@ public struct Generator {
     private func buildContext(from schema: Schema) -> [String: Any] {
         return [
             "operations": schema.operations,
-            "objects": schema.objects,
+            "objects": schema.objects.map(StencilObject.init),
             "interfaces": schema.interfaces,
             "unions": schema.unions,
             "enums": schema.enums,
@@ -64,7 +56,7 @@ public struct Generator {
             name: templateName,
             context: context)
 
-        rendered = rendered.trimmingCharacters(in: CharacterSet.newlines)
+        rendered = try rendered.format()
 
         print(rendered)
 
