@@ -2,7 +2,16 @@
 
 {% for object in objects %}
 public struct {{ object.name }} {
-{% for field in object.fields %}
+    {% for field in object.fields %}
     var {{ field.name }}: {{ field.typeName }}{% endfor %}
+}
+{% endfor %}
+
+// MARK: - Enums
+
+{% for enum in enums %}
+public enum {{ enum.name }} {
+    {% for value in enum.values %}
+    case {{ value.name }}{% endfor %}
 }
 {% endfor %}

@@ -25,34 +25,64 @@ public extension Field {
     }
 }
 
-public struct StencilObject {
-    public let name: String
-    public let description: String?
+enum Stencil {
 
-    public let fields: [StencilField]
-//    public let interfaces: [InterfaceTypeRef]?
+    public struct Object {
+        public let name: String
+        public let description: String?
 
-    init(_ objectType: ObjectType) {
-        self.name = objectType.name
-        self.description = objectType.description
-        self.fields = objectType.fields.map(StencilField.init)
+        public let fields: [Stencil.Field]
+        //    public let interfaces: [InterfaceTypeRef]?
+
+        init(_ objectType: ObjectType) {
+            self.name = objectType.name
+            self.description = objectType.description
+            self.fields = objectType.fields.map(Stencil.Field.init)
+        }
     }
-}
 
-public struct StencilField {
-    public let name: String
-    public let description: String?
- //   public let args: [InputValue]
-    public let typeName: String
-    public let isDeprecated: Bool
-    public let deprecationReason: String?
+    public struct Field {
+        public let name: String
+        public let description: String?
+        //   public let args: [InputValue]
+        public let typeName: String
+        public let isDeprecated: Bool
+        public let deprecationReason: String?
 
-    init(_ field: Field) {
-        self.name = field.name
-        self.description = field.description
-        self.typeName = field.stencilTypeName
-        self.isDeprecated = field.isDeprecated
-        self.deprecationReason = field.deprecationReason
+        init(_ fieldType: GraphQL_CodeGenerator.Field) {
+            self.name = fieldType.name
+            self.description = fieldType.description
+            self.typeName = fieldType.stencilTypeName
+            self.isDeprecated = fieldType.isDeprecated
+            self.deprecationReason = fieldType.deprecationReason
+        }
     }
-}
 
+    public struct Enum {
+        public let name: String
+        public let description: String?
+
+        public let values: [EnumValue]
+
+        init(_ enumType: EnumType) {
+            self.name = enumType.name
+            self.description = enumType.description
+            self.values = enumType.enumValues.map(EnumValue.init)
+        }
+    }
+
+    public struct EnumValue {
+        public let name: String
+        public let description: String?
+        public let isDeprecated: Bool
+        public let deprecationReason: String?
+
+        init(_ enumValueType: GraphQL_CodeGenerator.EnumValue) {
+            self.name = enumValueType.name
+            self.description = enumValueType.description
+            self.isDeprecated = enumValueType.isDeprecated
+            self.deprecationReason = enumValueType.deprecationReason
+        }
+    }
+
+}

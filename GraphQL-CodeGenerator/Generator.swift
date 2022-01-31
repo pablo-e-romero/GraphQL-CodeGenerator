@@ -39,12 +39,12 @@ public struct Generator {
 
     private func buildContext(from schema: Schema) -> [String: Any] {
         return [
-            "operations": schema.operations,
-            "objects": schema.objects.map(StencilObject.init),
-            "interfaces": schema.interfaces,
-            "unions": schema.unions,
-            "enums": schema.enums,
-            "inputObjects": schema.inputObjects
+//            "operations": schema.operations,
+            "objects": schema.objects.map(Stencil.Object.init),
+//            "interfaces": schema.interfaces,
+//            "unions": schema.unions,
+            "enums": schema.enums.map(Stencil.Enum.init),
+//            "inputObjects": schema.inputObjects
         ]
     }
 
