@@ -32,15 +32,15 @@ private func isTypeArray<T>(_ type: TypeRef<T>) -> Bool {
     }
 }
 
-private func processDescriptionLines(_ value: String?) -> (isEmpty: Bool, lines: [String]) {
-    guard let value = value else { return (true, []) }
+private func processDescriptionLines(_ value: String?) -> (hasDescription: Bool, lines: [String]) {
+    guard let value = value, !value.isEmpty else { return (false, []) }
     let descriptionLines: [String] = value.split(separator: "\n").map(String.init)
-    return (isEmpty: descriptionLines.isEmpty, lines: descriptionLines)
+    return (hasDescription: true, lines: descriptionLines)
 }
 
-private func processDeprecationReason(_ value: String?) -> (isEmpty: Bool, value: String?) {
-    guard let value = value, !value.isEmpty else { return (true, nil) }
-    return (isEmpty: false, value: value)
+private func processDeprecationReason(_ value: String?) -> (hasDescription: Bool, value: String?) {
+    guard let value = value, !value.isEmpty else { return (false, nil) }
+    return (hasDescription: true, value: value)
 }
 
 enum Stencil {
@@ -49,7 +49,6 @@ enum Stencil {
         public let name: String
         public let hasDescription: Bool
         public let descriptionLines: [String]
-
         public let fields: [Stencil.Field]
         //    public let interfaces: [InterfaceTypeRef]?
 
