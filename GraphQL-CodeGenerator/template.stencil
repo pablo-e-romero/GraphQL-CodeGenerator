@@ -1,11 +1,17 @@
 // MARK: - Objects
 
 {% for object in objects %}
+    {% for line in object.descriptionLines %}
+/// {{ line }}
+    {% endfor %}    
 public struct {{ object.name }} {
     {% for field in object.fields %}
+        {% for line in field.descriptionLines %}
+    /// {{ line }}
+        {% endfor %}   
         {% if field.isArray %} 
     var {{ field.name }}: [{{ field.typeName }}]{% if field.isOptional %}?{% endif %}
-        {% else %}
+            {% else %}
     var {{ field.name }}: {{ field.typeName }}{% if field.isOptional %}?{% endif %}
         {% endif %}
     {% endfor %}
@@ -16,9 +22,15 @@ public struct {{ object.name }} {
 // MARK: - Enums
 
 {% for enum in enums %}
+    {% for line in enum.descriptionLines %}
+/// {{ line }} 
+    {% endfor %}
 public enum {{ enum.name }} {
-    {% for value in enum.values %}
-    case {{ value.name }}
+    {% for enumValue in enum.values %}
+        {% for line in enumValue.descriptionLines %}
+    /// {{ line }} 
+        {% endfor %}
+    case {{ enumValue.name }}
     {% endfor %}
 }
 

@@ -58,7 +58,7 @@ public struct Generator {
             name: templateName,
             context: context)
 
-        rendered = try rendered.format()
+//        rendered = try rendered.format()
 
         print(rendered)
 
