@@ -7,21 +7,19 @@
 
 import Foundation
 
-public extension ScalarMap {
-    func name(for type: TypeDescription) -> String {
-        let typeName = type.name
-        guard type.isScalar else { return typeName }
-        return (try? scalar(typeName)) ?? typeName
-    }
-}
 
-public extension Field {
-    var stencilTypeName: String {
-        switch self.type {
-        case let .named(type): return "\(scalarMap.name(for: type))?"
-        case let .list(ref): return "[\(scalarMap.name(for: ref.namedType))]"
-        case let .nonNull(ref): return scalarMap.name(for: ref.namedType)
-        }
+private func stencilTypeName(for type: TypeRef<OutputRef>) -> String {
+    let namedType = type.namedType
+    var typeName = type.namedType.name
+
+    if namedType.isScalar, let scalarName = try? scalarMap.scalar(typeName) {
+        typeName = scalarName
+    }
+
+    switch type {
+    case .named: return "\(typeName)?"
+    case .list: return "[\(typeName)]"
+    case .nonNull: return typeName
     }
 }
 
@@ -50,9 +48,9 @@ enum Stencil {
         public let deprecationReason: String?
 
         init(_ fieldType: GraphQL_CodeGenerator.Field) {
-            self.name = fieldType.name
+            self.name = fieldType.name.normalize
             self.description = fieldType.description
-            self.typeName = fieldType.stencilTypeName
+            self.typeName = stencilTypeName(for: fieldType.type)
             self.isDeprecated = fieldType.isDeprecated
             self.deprecationReason = fieldType.deprecationReason
         }
@@ -78,7 +76,7 @@ enum Stencil {
         public let deprecationReason: String?
 
         init(_ enumValueType: GraphQL_CodeGenerator.EnumValue) {
-            self.name = enumValueType.name
+            self.name = enumValueType.name.normalize
             self.description = enumValueType.description
             self.isDeprecated = enumValueType.isDeprecated
             self.deprecationReason = enumValueType.deprecationReason
