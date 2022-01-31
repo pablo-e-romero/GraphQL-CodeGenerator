@@ -3,7 +3,7 @@
 {% for object in objects %}
 public struct {{ object.name }} {
     {% for field in object.fields %}
-    var {{ field.name }}: {{ field.typeName }}{% endfor %}
+    var {{ field.name }}: {% if field.isArray %}{% if field.isOptional %}[{{ field.typeName }}]?{% else %}[{{ field.typeName }}]{% endif %}{% else %}{% if field.isOptional %}{{ field.typeName }}?{% else %}{{ field.typeName }}{% endif %}{% endif %}{% endfor %}
 }
 {% endfor %}
 

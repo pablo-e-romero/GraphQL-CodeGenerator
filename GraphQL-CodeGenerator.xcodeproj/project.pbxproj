@@ -28,6 +28,7 @@
 		B1849E3E27A4B95900900974 /* SwiftFormat in Frameworks */ = {isa = PBXBuildFile; productRef = B1849E3D27A4B95900900974 /* SwiftFormat */; };
 		B1849E4027A4CAC400900974 /* Stencil+Objects.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1849E3F27A4CAC400900974 /* Stencil+Objects.swift */; };
 		B1849E4627A803D200900974 /* String+Normalize.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1849E4527A803D200900974 /* String+Normalize.swift */; };
+		B1849E4B27A80B8C00900974 /* String+Empty.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1849E4A27A80B8C00900974 /* String+Empty.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -80,6 +81,7 @@
 		B1849E3A27A4B8FD00900974 /* String+Format.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Format.swift"; sourceTree = "<group>"; };
 		B1849E3F27A4CAC400900974 /* Stencil+Objects.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Stencil+Objects.swift"; sourceTree = "<group>"; };
 		B1849E4527A803D200900974 /* String+Normalize.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Normalize.swift"; sourceTree = "<group>"; };
+		B1849E4A27A80B8C00900974 /* String+Empty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Empty.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -149,6 +151,7 @@
 			children = (
 				B1849E3A27A4B8FD00900974 /* String+Format.swift */,
 				B1849E4527A803D200900974 /* String+Normalize.swift */,
+				B1849E4A27A80B8C00900974 /* String+Empty.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -237,6 +240,7 @@
 				B1849E2227A45F8800900974 /* Configuration.swift in Sources */,
 				B1849E2627A4618500900974 /* Error.swift in Sources */,
 				B1849E2827A4619100900974 /* ScalarMap.swift in Sources */,
+				B1849E4B27A80B8C00900974 /* String+Empty.swift in Sources */,
 				B1849E3B27A4B8FD00900974 /* String+Format.swift in Sources */,
 				B1849E1627A4518500900974 /* Introspection.swift in Sources */,
 				B1849E4627A803D200900974 /* String+Normalize.swift in Sources */,
