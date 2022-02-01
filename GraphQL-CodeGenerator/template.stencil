@@ -44,7 +44,7 @@ public enum {{ enum.name }} {
     @available(*, deprecated)  
             {% endif %}
         {% endif %}
-    case {{ enumValue.name }}
+    case {{ enumValue.name }}{% if enumValue.hasAssociatedValues %}({% for value in enumValue.associatedValues %}{{ value.name }}: {% if value.isArray %}[{{ value.typeName }}]{% if value.isOptional %}?{% endif %}{% else %}{{ value.typeName }}{% if value.isOptional %}?{% endif %}{% endif %}{% if not forloop.last %}, {% endif %}{% endfor %}){% endif %}
     {% endfor %}
 }
 
@@ -56,7 +56,7 @@ public enum {{ enum.name }} {
     {% for line in interface.descriptionLines %}
 /// {{ line }}
     {% endfor %}    
-public protocol {{ interface.name }} {
+public protocol {{ interface.name }}{% if interface.conformsSomeInterface %}: {{ interface.interfacesName|join:", " }}{% endif %} {
     {% for field in interface.fields %}
         {% for line in field.descriptionLines %}
     /// {{ line }}

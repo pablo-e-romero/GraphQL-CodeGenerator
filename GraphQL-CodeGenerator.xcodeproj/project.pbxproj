@@ -29,6 +29,7 @@
 		B1849E4027A4CAC400900974 /* Stencil+Objects.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1849E3F27A4CAC400900974 /* Stencil+Objects.swift */; };
 		B1849E4627A803D200900974 /* String+Normalize.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1849E4527A803D200900974 /* String+Normalize.swift */; };
 		B1849E4D27A839C600900974 /* StencilSwiftTemplate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1849E4C27A839C600900974 /* StencilSwiftTemplate.swift */; };
+		B1849E5927A9521500900974 /* String+Case.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1849E5827A9521500900974 /* String+Case.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -82,6 +83,7 @@
 		B1849E3F27A4CAC400900974 /* Stencil+Objects.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Stencil+Objects.swift"; sourceTree = "<group>"; };
 		B1849E4527A803D200900974 /* String+Normalize.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Normalize.swift"; sourceTree = "<group>"; };
 		B1849E4C27A839C600900974 /* StencilSwiftTemplate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StencilSwiftTemplate.swift; sourceTree = "<group>"; };
+		B1849E5827A9521500900974 /* String+Case.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Case.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -150,6 +152,7 @@
 		B1849E4727A803D700900974 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				B1849E5827A9521500900974 /* String+Case.swift */,
 				B1849E3A27A4B8FD00900974 /* String+Format.swift */,
 				B1849E4527A803D200900974 /* String+Normalize.swift */,
 			);
@@ -240,6 +243,7 @@
 				B1849E1527A4518500900974 /* Type.swift in Sources */,
 				B1849E2227A45F8800900974 /* Configuration.swift in Sources */,
 				B1849E2627A4618500900974 /* Error.swift in Sources */,
+				B1849E5927A9521500900974 /* String+Case.swift in Sources */,
 				B1849E2827A4619100900974 /* ScalarMap.swift in Sources */,
 				B1849E3B27A4B8FD00900974 /* String+Format.swift in Sources */,
 				B1849E1627A4518500900974 /* Introspection.swift in Sources */,

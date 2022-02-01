@@ -40,13 +40,37 @@ public struct Generator {
     }
 
     private func buildContext(from schema: Schema) -> [String: Any] {
+        let unions = schema.unions.map(Stencil.Union.init)
+        let unionsPossibleObjectsName = Set(schema.unions.flatMap { $0.possibleTypes.map(\.name) })
+
+        let objects = schema.objects
+            // Objects that are part of an Union are excluded.
+            .filter { !unionsPossibleObjectsName.contains($0.name) }
+            .map(Stencil.Object.init)
+
+        var unionObjectsByName: [String: Stencil.Object] = [:]
+        schema.objects
+            .filter { unionsPossibleObjectsName.contains($0.name) }
+            .map(Stencil.Object.init)
+            .forEach { unionObjectsByName[$0.name] = $0 }
+
+        let interfaces = schema.interfaces.map(Stencil.Interface.init)
+
+        var enums = schema.enums.map(Stencil.Enum.init)
+        // For now all Unions are considered enums with assoicated values.
+        // We have to have some annotation or configuration setting to mark
+        // which Unions have to be treat like that.
+        enums += unions.map { Stencil.Enum.init($0, unionObjectsByName: unionObjectsByName) }
+
+//        let inputObjects = schema.inputObjects.map(Stencil.InputObject.init)
+
         return [
 //            "operations": schema.operations,
-            "objects": schema.objects.map(Stencil.Object.init),
-            "interfaces": schema.interfaces.map(Stencil.Interface.init),
-//            "unions": schema.unions,
-            "enums": schema.enums.map(Stencil.Enum.init),
-//            "inputObjects": schema.inputObjects
+            "objects": objects,
+            "interfaces": interfaces,
+            "unions": unions,
+            "enums": enums,
+//            "inputObjects": inputObjects
         ]
     }
 
