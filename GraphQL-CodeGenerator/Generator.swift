@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import StencilSwiftKit
 import Stencil
 import PathKit
 
@@ -14,14 +15,14 @@ public struct Generator {
 
     // MARK: - Initializer
 
-    public init(templatesPaths: [Path]) {
-        // TODO: add extensions
-        self.environment = Environment(
-            loader: FileSystemLoader(paths: templatesPaths),
-            templateClass: StencilSwiftTemplate.self)
+    public init(templatesPath: [Path]) {
+        var environment = stencilSwiftEnvironment()
+        environment.loader = FileSystemLoader(paths: templatesPath)
+        self.environment = environment
     }
 
     // MARK: - Methods
+
 
     /// Generates a target SwiftGraphQL Selection file.
     ///

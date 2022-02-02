@@ -39,7 +39,7 @@ extension Generate {
             scalarMap.merge(with: configuration.scalars)
 
             let generator = Generator(
-                templatesPaths: ["templates/"])
+                templatesPath: ["templates/"])
            
             try! generator.generate(
                 schemaPath: "schema.json",
