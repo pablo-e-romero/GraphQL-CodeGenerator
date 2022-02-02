@@ -79,11 +79,9 @@ public struct Generator {
         let schema = try loadSchema(from: schemaPath)
         let context = buildContext(from: schema)
 
-        var rendered = try environment.renderTemplate(
+        let rendered = try environment.renderTemplate(
             name: templateName,
             context: context)
-
-//        rendered = try rendered.format()
 
         print(rendered)
 

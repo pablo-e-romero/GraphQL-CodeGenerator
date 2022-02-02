@@ -22,8 +22,6 @@
 		B1849E2827A4619100900974 /* ScalarMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1849E0727A44F3100900974 /* ScalarMap.swift */; };
 		B1849E3027A4A00700900974 /* PathKit in Frameworks */ = {isa = PBXBuildFile; productRef = B1849E2F27A4A00700900974 /* PathKit */; };
 		B1849E3927A4B6B300900974 /* template.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = B1849E3127A4AE3D00900974 /* template.stencil */; };
-		B1849E3B27A4B8FD00900974 /* String+Format.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1849E3A27A4B8FD00900974 /* String+Format.swift */; };
-		B1849E3E27A4B95900900974 /* SwiftFormat in Frameworks */ = {isa = PBXBuildFile; productRef = B1849E3D27A4B95900900974 /* SwiftFormat */; };
 		B1849E4027A4CAC400900974 /* Stencil+Objects.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1849E3F27A4CAC400900974 /* Stencil+Objects.swift */; };
 		B1849E4627A803D200900974 /* String+Normalize.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1849E4527A803D200900974 /* String+Normalize.swift */; };
 		B1849E5927A9521500900974 /* String+Case.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1849E5827A9521500900974 /* String+Case.swift */; };
@@ -80,7 +78,6 @@
 		B1849E1D27A459C100900974 /* schema.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = schema.json; sourceTree = "<group>"; };
 		B1849E2127A45F8800900974 /* Configuration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Configuration.swift; sourceTree = "<group>"; };
 		B1849E3127A4AE3D00900974 /* template.stencil */ = {isa = PBXFileReference; lastKnownFileType = text; path = template.stencil; sourceTree = "<group>"; };
-		B1849E3A27A4B8FD00900974 /* String+Format.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Format.swift"; sourceTree = "<group>"; };
 		B1849E3F27A4CAC400900974 /* Stencil+Objects.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Stencil+Objects.swift"; sourceTree = "<group>"; };
 		B1849E4527A803D200900974 /* String+Normalize.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Normalize.swift"; sourceTree = "<group>"; };
 		B1849E5827A9521500900974 /* String+Case.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Case.swift"; sourceTree = "<group>"; };
@@ -94,7 +91,6 @@
 			files = (
 				B1849E3027A4A00700900974 /* PathKit in Frameworks */,
 				B1849E2527A4606300900974 /* Yams in Frameworks */,
-				B1849E3E27A4B95900900974 /* SwiftFormat in Frameworks */,
 				B1849E6927AAF00F00900974 /* StencilSwiftKit in Frameworks */,
 				B1849E1C27A4545800900974 /* ArgumentParser in Frameworks */,
 			);
@@ -154,7 +150,6 @@
 			isa = PBXGroup;
 			children = (
 				B1849E5827A9521500900974 /* String+Case.swift */,
-				B1849E3A27A4B8FD00900974 /* String+Format.swift */,
 				B1849E4527A803D200900974 /* String+Normalize.swift */,
 			);
 			path = Extensions;
@@ -182,7 +177,6 @@
 				B1849E1B27A4545800900974 /* ArgumentParser */,
 				B1849E2427A4606300900974 /* Yams */,
 				B1849E2F27A4A00700900974 /* PathKit */,
-				B1849E3D27A4B95900900974 /* SwiftFormat */,
 				B1849E6827AAF00F00900974 /* StencilSwiftKit */,
 			);
 			productName = "GraphQL-CodeGenerator";
@@ -217,7 +211,6 @@
 				B1849E1A27A4545800900974 /* XCRemoteSwiftPackageReference "swift-argument-parser" */,
 				B1849E2327A4606300900974 /* XCRemoteSwiftPackageReference "Yams" */,
 				B1849E2E27A4A00700900974 /* XCRemoteSwiftPackageReference "PathKit" */,
-				B1849E3C27A4B95900900974 /* XCRemoteSwiftPackageReference "SwiftFormat" */,
 				B1849E6727AAF00F00900974 /* XCRemoteSwiftPackageReference "StencilSwiftKit" */,
 			);
 			productRefGroup = B1849DFC27A447B100900974 /* Products */;
@@ -245,7 +238,6 @@
 				B1849E2627A4618500900974 /* Error.swift in Sources */,
 				B1849E5927A9521500900974 /* String+Case.swift in Sources */,
 				B1849E2827A4619100900974 /* ScalarMap.swift in Sources */,
-				B1849E3B27A4B8FD00900974 /* String+Format.swift in Sources */,
 				B1849E1627A4518500900974 /* Introspection.swift in Sources */,
 				B1849E4627A803D200900974 /* String+Normalize.swift in Sources */,
 				B1849E2727A4618D00900974 /* Generator.swift in Sources */,
@@ -440,14 +432,6 @@
 				minimumVersion = 1.0.0;
 			};
 		};
-		B1849E3C27A4B95900900974 /* XCRemoteSwiftPackageReference "SwiftFormat" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/nicklockwood/SwiftFormat";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 0.9.6;
-			};
-		};
 		B1849E6727AAF00F00900974 /* XCRemoteSwiftPackageReference "StencilSwiftKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SwiftGen/StencilSwiftKit";
@@ -473,11 +457,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = B1849E2E27A4A00700900974 /* XCRemoteSwiftPackageReference "PathKit" */;
 			productName = PathKit;
-		};
-		B1849E3D27A4B95900900974 /* SwiftFormat */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = B1849E3C27A4B95900900974 /* XCRemoteSwiftPackageReference "SwiftFormat" */;
-			productName = SwiftFormat;
 		};
 		B1849E6827AAF00F00900974 /* StencilSwiftKit */ = {
 			isa = XCSwiftPackageProductDependency;
