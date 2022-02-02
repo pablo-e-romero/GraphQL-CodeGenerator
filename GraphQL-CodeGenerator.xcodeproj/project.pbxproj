@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		B1849DFF27A447B100900974 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1849DFE27A447B100900974 /* main.swift */; };
-		B1849E1427A4518500900974 /* TypeRef+Inverted.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1849E0E27A4518500900974 /* TypeRef+Inverted.swift */; };
 		B1849E1527A4518500900974 /* Type.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1849E0F27A4518500900974 /* Type.swift */; };
 		B1849E1627A4518500900974 /* Introspection.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1849E1027A4518500900974 /* Introspection.swift */; };
 		B1849E1727A4518500900974 /* Schema.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1849E1127A4518500900974 /* Schema.swift */; };
@@ -69,7 +68,6 @@
 		B1849E0527A44F0700900974 /* Generator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Generator.swift; sourceTree = "<group>"; };
 		B1849E0727A44F3100900974 /* ScalarMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScalarMap.swift; sourceTree = "<group>"; };
 		B1849E0927A44F4F00900974 /* Error.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Error.swift; sourceTree = "<group>"; };
-		B1849E0E27A4518500900974 /* TypeRef+Inverted.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "TypeRef+Inverted.swift"; sourceTree = "<group>"; };
 		B1849E0F27A4518500900974 /* Type.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Type.swift; sourceTree = "<group>"; };
 		B1849E1027A4518500900974 /* Introspection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Introspection.swift; sourceTree = "<group>"; };
 		B1849E1127A4518500900974 /* Schema.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Schema.swift; sourceTree = "<group>"; };
@@ -136,7 +134,6 @@
 		B1849E0D27A4518500900974 /* GraphQLAST */ = {
 			isa = PBXGroup;
 			children = (
-				B1849E0E27A4518500900974 /* TypeRef+Inverted.swift */,
 				B1849E0F27A4518500900974 /* Type.swift */,
 				B1849E1027A4518500900974 /* Introspection.swift */,
 				B1849E1127A4518500900974 /* Schema.swift */,
@@ -231,7 +228,6 @@
 				B1849E1827A4518500900974 /* TypeRef.swift in Sources */,
 				B1849E1727A4518500900974 /* Schema.swift in Sources */,
 				B1849DFF27A447B100900974 /* main.swift in Sources */,
-				B1849E1427A4518500900974 /* TypeRef+Inverted.swift in Sources */,
 				B1849E1927A4518500900974 /* Value.swift in Sources */,
 				B1849E1527A4518500900974 /* Type.swift in Sources */,
 				B1849E2227A45F8800900974 /* Configuration.swift in Sources */,

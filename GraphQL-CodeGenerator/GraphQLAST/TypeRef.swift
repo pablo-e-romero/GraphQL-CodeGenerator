@@ -25,23 +25,6 @@ public indirect enum TypeRef<T: TypeDescription> {
     case named(T)
     case list(TypeRef)
     case nonNull(TypeRef)
-
-    // MARK: - Calculated properties
-
-    /// Returns the non nullable self.
-    public var nonNullable: TypeRef<T> {
-        inverted.nonNullable.inverted
-    }
-
-    /// Makes the type optional.
-    public var nullable: TypeRef<T> {
-        switch self {
-        case let .nonNull(subref):
-            return subref
-        default:
-            return self
-        }
-    }
 }
 
 public extension TypeRef {
