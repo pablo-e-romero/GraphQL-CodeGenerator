@@ -1,26 +1,38 @@
+{# Macro declarations #}
+
+{% macro renderDescription type %}
+{% for line in type.descriptionLines %}
+/// {{ line }}
+{% endfor %}  
+{% endmacro %}
+
+{% macro renderInterfaces type %}{% if type.conformsSomeInterface %}: {% for interfaceName in type.interfacesName %}{% if not forloop.first %}, {% endif %}{{ interfaceName }}{% endfor %}{% endif %}{% endmacro %}
+
+{% macro renderDeprecation type %}
+{% if type.isDeprecated %}
+    {% if type.hasDeprecationReason %}
+@available(*, deprecated, message: "{{ type.deprecationReason }}")
+    {% else %}
+@available(*, deprecated)  
+    {% endif %}
+{% endif %}
+{% endmacro %}
+
+{% macro renderTypeDeclaration type %}{% if type.isArray %}[{{ type.typeName }}]{% else %}{{ type.typeName }}{% endif %}{% if type.isOptional %}?{% endif %}{% endmacro %}
+
+{% macro renderAssociatedValues enumValue %}{% if enumValue.hasAssociatedValues %}({% for value in enumValue.associatedValues %}{{ value.name }}: {% call renderTypeDeclaration value %}{% if not forloop.last %}, {% endif %}{% endfor %}){% endif %}{% endmacro %}
+
+{# Template implementation #}
+
 // MARK: - Objects
 
 {% for object in objects %}
-    {% for line in object.descriptionLines %}
-/// {{ line }}
-    {% endfor %}    
-public struct {{ object.name }}{% if object.conformsSomeInterface %}: {{ object.interfacesName|join:", " }}{% endif %} {
+    {% call renderDescription object.descriptionLines %}
+public struct {{ object.name }}{% call renderInterfaces object %} {
     {% for field in object.fields %}
-        {% for line in field.descriptionLines %}
-    /// {{ line }}
-        {% endfor %}
-        {% if field.isDeprecated %}
-            {% if field.hasDeprecationReason %}
-    @available(*, deprecated, message: "{{ field.deprecationReason }}")
-            {% else %}
-    @available(*, deprecated)  
-            {% endif %}
-        {% endif %}
-        {% if field.isArray %} 
-    public let {{ field.name }}: [{{ field.typeName }}]{% if field.isOptional %}?{% endif %}
-        {% else %}
-    public let {{ field.name }}: {{ field.typeName }}{% if field.isOptional %}?{% endif %}
-        {% endif %}
+        {% call renderDescription field %}
+        {% call renderDeprecation field %}
+    public let {{ field.name }}: {% call renderTypeDeclaration field %}
     {% endfor %}
 }
 
@@ -29,22 +41,12 @@ public struct {{ object.name }}{% if object.conformsSomeInterface %}: {{ object.
 // MARK: - Enums
 
 {% for enum in enums %}
-    {% for line in enum.descriptionLines %}
-/// {{ line }} 
-    {% endfor %}
+    {% call renderDescription enum.descriptionLines %}
 public enum {{ enum.name }} {
     {% for enumValue in enum.values %}
-        {% for line in enumValue.descriptionLines %}
-    /// {{ line }} 
-        {% endfor %}
-        {% if enumValue.isDeprecated %}
-            {% if enumValue.hasDeprecationReason %}
-    @available(*, deprecated, message: "{{ enumValue.deprecationReason }}")
-            {% else %}
-    @available(*, deprecated)  
-            {% endif %}
-        {% endif %}
-    case {{ enumValue.name }}{% if enumValue.hasAssociatedValues %}({% for value in enumValue.associatedValues %}{{ value.name }}: {% if value.isArray %}[{{ value.typeName }}]{% if value.isOptional %}?{% endif %}{% else %}{{ value.typeName }}{% if value.isOptional %}?{% endif %}{% endif %}{% if not forloop.last %}, {% endif %}{% endfor %}){% endif %}
+        {% call renderDescription enumValue %}
+        {% call renderDeprecation enumValue %}
+    case {{ enumValue.name }}{% call renderAssociatedValues enumValue %}
     {% endfor %}
 }
 
@@ -53,26 +55,12 @@ public enum {{ enum.name }} {
 // MARK: - Protocols
 
 {% for interface in interfaces %}
-    {% for line in interface.descriptionLines %}
-/// {{ line }}
-    {% endfor %}    
-public protocol {{ interface.name }}{% if interface.conformsSomeInterface %}: {{ interface.interfacesName|join:", " }}{% endif %} {
+{% call renderDescription interface.descriptionLines %}    
+public protocol {{ interface.name }}{% call renderInterfaces interface %} {
     {% for field in interface.fields %}
-        {% for line in field.descriptionLines %}
-    /// {{ line }}
-        {% endfor %}
-        {% if field.isDeprecated %}
-            {% if field.hasDeprecationReason %}
-    @available(*, deprecated, message: "{{ field.deprecationReason }}")
-            {% else %}
-    @available(*, deprecated)  
-            {% endif %}
-        {% endif %}
-        {% if field.isArray %} 
-    var {{ field.name }}: [{{ field.typeName }}]{% if field.isOptional %}?{% endif %} { get }
-        {% else %}
-    var {{ field.name }}: {{ field.typeName }}{% if field.isOptional %}?{% endif %} { get }
-        {% endif %}
+        {% call renderDescription field %} 
+        {% call renderDeprecation field %}
+    var {{ field.name }}: {% call renderTypeDeclaration field %} { get }
     {% endfor %}
 }
 
